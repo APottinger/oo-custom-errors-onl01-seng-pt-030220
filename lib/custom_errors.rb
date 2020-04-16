@@ -1,31 +1,29 @@
-class Person
-  attr_accessor :partner, :name
- 
-  def initialize(name)
+
+class BankAccount
+
+  attr_accessor :balance, :status
+  attr_reader :name
+
+  def initialize(name, balance=1000)
     @name = name
+    @balance = balance
+    @status = "open"
   end
- 
-  def get_married(person)
-    self.partner = person
-    if person.class != Person
-      begin
-        raise PartnerError
-      rescue PartnerError => error
-          puts error.message
-      end
-    else
-      person.partner = self
-    end
+
+  def deposit(amt)
+    @balance += amt
   end
- 
-  class PartnerError < StandardError
-    def message
-      "you must give the get_married method an argument of an instance of the person class!"
-    end
+
+  def display_balance
+    "Your balance is $#{balance}."
+  end
+
+  def valid?
+    @status == "open" && balance > 0
+  end
+
+  def close_account
+    self.status = "closed"
   end
 end
- 
-
-
-
-
+© 2020 GitHub, Inc.
