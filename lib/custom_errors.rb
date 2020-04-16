@@ -1,17 +1,29 @@
-class Person
-  attr_accessor :partner, :name
 
-  def initialize(name)
+class BankAccount
+
+  attr_accessor :balance, :status
+  attr_reader :name
+
+  def initialize(name, balance=1000)
     @name = name
+    @balance = balance
+    @status = "open"
   end
 
-  def get_married(person)
-    self.partner = person
-    person.partner = self
+  def deposit(amt)
+    @balance += amt
   end
 
+  def display_balance
+    "Your balance is $#{balance}."
+  end
+
+  def valid?
+    @status == "open" && balance > 0
+  end
+
+  def close_account
+    self.status = "closed"
+  end
 end
-
-beyonce = Person.new("Beyonce")
-beyonce.get_married("Jay-Z")
-puts beyonce.name
+© 2020 GitHub, Inc.
